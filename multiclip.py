@@ -19,6 +19,6 @@ def create_clip(tab, x):
     clear_button.grid(column=3, row=x, pady=5)
 
 
-def create_tool(tab, num):
+def create_multiclip(tab_name, num):
     for i in range(0, num):
-        create_clip(tab, i)
+        create_clip(tab_name, i)
