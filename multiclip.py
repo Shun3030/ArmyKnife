@@ -17,3 +17,8 @@ def create_clip(tab, x):
     copy_button.grid(column=2, row=x, padx=10, pady=5)
     clear_button = ttk.Button(tab, text="clear", command=lambda: box.delete(0, tk.END))
     clear_button.grid(column=3, row=x, pady=5)
+
+
+def create_tool(tab, num):
+    for i in range(0, num):
+        create_clip(tab, i)
