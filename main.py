@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 
-import multiclip, period
+import multiclip, period, passgen
 
 
 def create_tab(name):
@@ -19,5 +19,6 @@ if __name__ == '__main__':
 
     multiclip.create_multiclip(create_tab('multiclip'), 5)
     period.create_period(create_tab('period'))
+    passgen.create_passgen(create_tab('passgen'))
 
     root.mainloop()
