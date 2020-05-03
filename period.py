@@ -62,10 +62,12 @@ def create_period(tab_name):
     calc_result = ttk.Label(tab_name, text="○○h ○○m")
     calc_result.grid(column=3, row=2, pady=10)
 
-    calc_button = ttk.Button(tab_name, text="calc", width=7, command=lambda: calc_period(start_hour, start_minute, end_hour, end_minute, calc_result))
+    calc_button = ttk.Button(tab_name, text="calc", width=7, command=lambda:\
+         calc_period(start_hour, start_minute, end_hour, end_minute, calc_result))
     calc_button.grid(column=2, row=3, pady=10)
 
-    copy_button = ttk.Button(tab_name, text="copy", width=7, command=lambda: copy_label(tab_name, calc_result))
+    copy_button = ttk.Button(tab_name, text="copy", width=7, command=lambda:\
+         copy_label(tab_name, calc_result))
     copy_button.grid(column=4, row=3, pady=10)
 
 
