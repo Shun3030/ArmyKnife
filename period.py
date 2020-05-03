@@ -23,10 +23,10 @@ def calc_period(start_hour, start_minute, end_hour, end_minute, result):
         prog_min = prog_time % 60
 
         result_text = '{:0>2}h {:0>2}m'.format(prog_hour, prog_min)
-        result.configure(text=result_text)
+        result.configure(text=result_text, font=("",15))
     
     except ValueError:
-        result.configure(text="error!")
+        result.configure(text="error!", font=("",15), foreground='#ff0000')
 
         
 def copy_label(tab, label):
@@ -39,36 +39,39 @@ def create_period(tab_name):
     hours = gen_zfill(list(range(24)))
     minutes = gen_zfill(list(range(60)))
 
-    null_row = ttk.Label(tab_name, text=" ")
-    null_row.grid(column=0, row=0,pady=5)
+    start_label = ttk.Label(tab_name, text='start time')
+    start_label.place(relx=0.25, rely=0.15, anchor=tk.CENTER)
 
     start_hour = ttk.Combobox(tab_name, values=hours, width=3)
-    start_hour.grid(column=0, row=1, padx=10, pady=20)
+    start_hour.place(relx=0.15, rely=0.25, anchor=tk.CENTER)
     start_colon = ttk.Label(tab_name, text=":")
-    start_colon.grid(column=1, row=1, padx=1)
+    start_colon.place(relx=0.25, rely=0.25, anchor=tk.CENTER)
     start_minute = ttk.Combobox(tab_name, values=minutes, width=3)
-    start_minute.grid(column=2, row=1, padx=10)
+    start_minute.place(relx=0.35, rely=0.25, anchor=tk.CENTER)
 
-    progress_label = ttk.Label(tab_name, text="=> => =>")
-    progress_label.grid(column=3, row=1, padx=5)
+    progress_label = ttk.Label(tab_name, text="=>", font=("",12))
+    progress_label.place(relx=0.5, rely=0.25, anchor=tk.CENTER)
+
+    end_label = ttk.Label(tab_name, text='end time')
+    end_label.place(relx=0.75, rely=0.15, anchor=tk.CENTER)
 
     end_hour = ttk.Combobox(tab_name, values=hours, width=3)
-    end_hour.grid(column=4, row=1, padx=10, pady=5)
+    end_hour.place(relx=0.65, rely=0.25, anchor=tk.CENTER)
     end_colon = ttk.Label(tab_name, text=":")
-    end_colon.grid(column=5, row=1, padx=1)
+    end_colon.place(relx=0.75, rely=0.25, anchor=tk.CENTER)
     end_minute = ttk.Combobox(tab_name, values=minutes, width=3)
-    end_minute.grid(column=6, row=1, padx=10)
+    end_minute.place(relx=0.85, rely=0.25, anchor=tk.CENTER)
 
-    calc_result = ttk.Label(tab_name, text="○○h ○○m")
-    calc_result.grid(column=3, row=2, pady=10)
+    calc_result = ttk.Label(tab_name, text="○○h ○○m", font=("",15))
+    calc_result.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
 
     calc_button = ttk.Button(tab_name, text="calc", width=7, command=lambda:\
          calc_period(start_hour, start_minute, end_hour, end_minute, calc_result))
-    calc_button.grid(column=2, row=3, pady=10)
+    calc_button.place(relx=0.3, rely=0.8, anchor=tk.CENTER)
 
     copy_button = ttk.Button(tab_name, text="copy", width=7, command=lambda:\
          copy_label(tab_name, calc_result))
-    copy_button.grid(column=4, row=3, pady=10)
+    copy_button.place(relx=0.7, rely=0.8, anchor=tk.CENTER)
 
 
 if __name__ == '__main__':
