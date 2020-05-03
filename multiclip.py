@@ -22,3 +22,13 @@ def create_clip(tab, x):
 def create_multiclip(tab_name, num):
     for i in range(0, num):
         create_clip(tab_name, i)
+
+
+if __name__ == '__main__':
+    root = tk.Tk()
+    root.title("multiclip")
+    root.geometry("360x250")
+
+    create_multiclip(root, 5)
+
+    root.mainloop()

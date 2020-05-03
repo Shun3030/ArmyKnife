@@ -102,3 +102,13 @@ def create_passgen(tab_name):
 
     copy_button = ttk.Button(tab_name, text="copy", command=lambda: copy_label(tab_name, pass_label))
     copy_button.place(relx=0.5, rely=0.9, anchor=tk.CENTER)
+
+
+if __name__ == '__main__':
+    root = tk.Tk()
+    root.title("passgen")
+    root.geometry("360x250")
+
+    create_passgen(root)
+
+    root.mainloop()

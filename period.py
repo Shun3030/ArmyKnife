@@ -67,3 +67,13 @@ def create_period(tab_name):
 
     copy_button = ttk.Button(tab_name, text="copy", width=7, command=lambda: copy_label(tab_name, calc_result))
     copy_button.grid(column=4, row=3, pady=10)
+
+
+if __name__ == '__main__':
+    root = tk.Tk()
+    root.title("period")
+    root.geometry("360x250")
+
+    create_period(root)
+
+    root.mainloop()
