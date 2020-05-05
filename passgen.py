@@ -94,7 +94,7 @@ def create_passgen(tab_name):
     symflag_chkbtn = ttk.Checkbutton(tab_name, variable=bln, text='use symbol')
     symflag_chkbtn.grid(column=4, row=0, padx=5)
 
-    pass_label = ttk.Label(tab_name, text='Press "generate" buttun', font=("",12), foreground='#000000')
+    pass_label = ttk.Label(tab_name, text='Press "generate" button', font=("",12), foreground='#000000')
     pass_label.place(relx=0.5, rely=0.45, anchor=tk.CENTER)
 
     gen_button = ttk.Button(tab_name, text="generate", command=lambda: pass_decide(size_box.get(), bln.get(), pass_label))
