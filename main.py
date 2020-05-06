@@ -14,6 +14,7 @@ if __name__ == '__main__':
     root = tk.Tk()
     root.title("ArmyKnife")
     root.geometry("360x250")
+    root.resizable(width=False, height=False)
     nb = ttk.Notebook(root)
     nb.pack(expand=1, fill="both")
     iconfile = './armyknife.ico'

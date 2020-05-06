@@ -1,0 +1,5 @@
+■exeファイル作成用コマンド
+pyinstaller main.py --noconsole --onefile --ico=armyknife.ico --name ArmyKnife --hidden-import plyer.platforms.win.notification
+
+■specファイル変更点
+pathex=['ArmyKnife'],
