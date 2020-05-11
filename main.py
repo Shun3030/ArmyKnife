@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import ttk
+from tkinter import ttk, messagebox
 
 import multiclip, period, passgen, joinwords, timer, reminder
 
@@ -8,6 +8,10 @@ def create_tab(name):
     tab = tk.Frame(nb)
     nb.add(tab, text=name, padding=3)
     return tab
+
+def on_closing():
+    if messagebox.askokcancel("Quit", "Do you want to quit?"):
+        root.destroy()
     
 
 if __name__ == '__main__':
@@ -27,4 +31,5 @@ if __name__ == '__main__':
     timer.create_timer(create_tab('timer'))
     reminder.create_reminder(create_tab('reminder'))
 
+    root.protocol("WM_DELETE_WINDOW", on_closing)
     root.mainloop()
