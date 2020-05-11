@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 
-import multiclip, period, passgen, joinwords, timer
+import multiclip, period, passgen, joinwords, timer, reminder
 
 
 def create_tab(name):
@@ -25,5 +25,6 @@ if __name__ == '__main__':
     period.create_period(create_tab('period'))
     passgen.create_passgen(create_tab('passgen'))
     timer.create_timer(create_tab('timer'))
+    reminder.create_reminder(create_tab('reminder'))
 
     root.mainloop()

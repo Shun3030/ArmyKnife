@@ -38,7 +38,6 @@ class Timer:
         if self.count == False:
             self.count = True
             self.timer_refresh()
-        #notify('timer is running!')
         #print(f'timer is running! minsec={self.minsec} count={self.count}') # デバッグ用
 
     def timer_refresh(self):
@@ -50,11 +49,10 @@ class Timer:
             self.label.configure(text='{:0>2}:{:0>2}'.format(self.min, self.sec), font=("",50), foreground='#000000')
 
         #if self.minsec > 0 and self.count == False:
-            #notify('timer has stopped!')
             #print(f'timer has stopped! minsec={self.minsec} count={self.count}') # デバッグ用    
         
         if self.minsec == 0 and self.count == True:
-            notify('timer has finished!')
+            notify('ArmyKnife timer', 'timer has finished!')
             self.clear_timer()
             #print('timer_refresh() has completed!') # デバッグ用
 
@@ -68,9 +66,9 @@ class Timer:
         #print(f'clear_timer() has complited! minsec={self.minsec} count={self.count}') # デバッグ用
 
 
-def notify(message):
+def notify(title, message):
     notification.notify(
-            title='ArmyKnife timer',
+            title=title,
             message=message,
             app_name='ArmyKnife',
             app_icon='./armyknife.ico'
