@@ -5,38 +5,42 @@ import datetime as dt
 import period, timer
 
 
-def alert_reminder(hour, min, bln, desc):
-    if bln.get() == True:
-        try:
-            hour = int(hour.get())
-            min = int(min.get())
-            now = dt.datetime.now()
-            if hour == now.hour and min == now.minute:
-                description = desc.get()
-                timer.notify('ArmyKnife reminder', description)
-                bln.set(False)
-        except ValueError:
-            bln.set(False)
+class Reminder:
+    def __init__(self, box_hour, box_min, box_bln, box_desc):
+        self.box_hour = box_hour
+        self.box_min = box_min
+        self.box_bln = box_bln
+        self.box_desc = box_desc
+    
+    def alert(self):
+        if self.box_bln.get() == True:
+            try:
+                hour = int(self.box_hour.get())
+                min = int(self.box_min.get())
+                now= dt.datetime.now()
+                if hour == now.hour and min == now.minute:
+                    description = self.box_desc.get()
+                    timer.notify('ArmyKnife reminder', description)
+                    self.box_bln.set(False)
+            except ValueError:
+                self.box_bln.set(False)
 
 
-def run_reminder(tab, status, hour1, min1, bln1, desc1, hour2, min2, bln2, desc2, hour3, min3, bln3, desc3):
+def run_reminder(tab, status, rmds):
     if status.cget('text') == 'Reminder is running':
-        tab.after(1000, lambda: run_reminder(
-            tab, status, hour1, min1, bln1, desc1, hour2, min2, bln2, desc2, hour3, min3, bln3, desc3
-            ))
+        tab.after(1000, lambda: run_reminder(tab, status, rmds))
         # print('running...')
-        alert_reminder(hour1, min1, bln1, desc1)
-        alert_reminder(hour2, min2, bln2, desc2)
-        alert_reminder(hour3, min3, bln3, desc3)
+        for rmd in rmds:
+            rmd.alert()
     else:
         # print('stopped!')
         pass
         
 
-def start_reminder(tab, status, hour1, min1, bln1, desc1, hour2, min2, bln2, desc2, hour3, min3, bln3, desc3):
+def start_reminder(tab, status, rmds):
     if status.cget('text') == 'Reminder is stopping':
         status.configure(text='Reminder is running', font=("",20), foreground='#ff0000')
-        run_reminder(tab, status, hour1, min1, bln1, desc1, hour2, min2, bln2, desc2, hour3, min3, bln3, desc3)
+        run_reminder(tab, status, rmds)
 
 
 def stop_reminder(tab, status):
@@ -47,7 +51,7 @@ def create_reminder(tab_name):
     hour_list = period.gen_zfill(list(range(24)))
     min_list = period.gen_zfill(list(range(60)))
 
-    # 最上段
+    # 最上段のラベル
     top_hour_label = ttk.Label(tab_name, text='hh')
     top_hour_label.place(relx=0.1, rely=0.1, anchor=tk.CENTER)
     top_min_label = ttk.Label(tab_name, text='mm')
@@ -100,17 +104,19 @@ def create_reminder(tab_name):
     set_chkbtn3.place(relx=0.91, rely=0.5, anchor=tk.CENTER)
 
     # ON/OFF 制御
-    btn_on = ttk.Button(tab_name, text='on', width=7, command=lambda: start_reminder(
-        tab_name, status,
-        hour_box1, min_box1, bln1, desc_box1,
-        hour_box2, min_box2, bln2, desc_box2,
-        hour_box3, min_box3, bln3, desc_box3
-        ))
+    btn_on = ttk.Button(tab_name, text='on', width=7, command=lambda: start_reminder(tab_name, status, reminders))
     btn_on.place(relx=0.85, rely=0.75, anchor=tk.CENTER)
     btn_off = ttk.Button(tab_name, text='off', width=7, command=lambda: stop_reminder(tab_name, status))
     btn_off.place(relx=0.85, rely=0.9, anchor=tk.CENTER)
     status = ttk.Label(tab_name, text='Reminder is stopping', font=("",20))
     status.place(relx=0.38, rely=0.8, anchor=tk.CENTER)
+
+    # reminderインスタンス作成
+    rmd1 = Reminder(hour_box1, min_box1, bln1, desc_box1)
+    rmd2 = Reminder(hour_box2, min_box2, bln2, desc_box2)
+    rmd3 = Reminder(hour_box3, min_box3, bln3, desc_box3)
+
+    reminders = [rmd1, rmd2, rmd3]
 
 
 if __name__ == '__main__':
