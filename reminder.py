@@ -20,6 +20,9 @@ class Reminder:
                 now= dt.datetime.now()
                 if hour == now.hour and min == now.minute:
                     description = self.box_desc.get()
+                    if description == '':
+                        description = "It\'s time to start!"
+                    print(description)
                     timer.notify('ArmyKnife reminder', description)
                     self.box_bln.set(False)
             except ValueError:
